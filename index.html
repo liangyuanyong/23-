@@ -7,113 +7,100 @@
 
 </head>
 <body>
-    <h1>报名表</h1>
-    <form id="myForm">
-        <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="studentID">学号:</label>
-        <input type="text" id="studentID" name="studentID" required>
-        <label for="major">专业:</label>
-        <input type="text" id="major" name="major" required>
-        <label for="class">班级:</label>
-        <input type="text" id="class" name="class" required>
-        <label for="phone">手机号:</label>
-        <input type="tel" id="phone" name="phone" required>
-        <label for="qq">QQ号:</label>
-        <input type="text" id="qq" name="qq" required>
-        <label for="firstChoice">第一志愿部门:</label>
-        <input type="text" id="firstChoice" name="firstChoice" required>
-        <label for="secondChoice">第二志愿部门:</label>
-        <input type="text" id="secondChoice" name="secondChoice" required>
-        <label for="introduction">自我介绍（兴趣爱好、性格、技能等）:</label>
-        <textarea id="introduction" name="introduction" rows="4"></textarea>
-        <input type="submit" value="提交">  
-    </form>
-    <style>
-        body {
+    <div class="department">
+        <h1 class="department-title">学术培训部</h1>
+        <p class="department-description">
+            我们是科协的核心芯片与培训师。负责组建项目组，开展科技创新项目，鼓励并且引领部员参加科技类比赛，培养科协学术氛围。长期与团队进行交流活动，同时管理科协部分学习资源，配合其他部门开展活动。开展各个技术方向的培训。为科协培养输送技术性的人才。
+            这里有丰富的资源，你想学的，我们都会！
+        </p>
+    </div>
+    <div class="department">
+        <h1 class="department-title">秘书部</h1>
+        <p class="department-description">
+            秘书部作为连接老师、主席团与各部门之间的中枢部门，秘书部负责协助主席团统筹科协各项日常行政工作，上传下达，及时沟通，保证效率。
+        </p>
+    </div>
+    <div class="department">
+        <h1 class="department-title">竞赛管理部</h1>
+        <p class="department-description">
+            竞赛管理部是科协对外的友好形象大使，而且具备着强大的协调、交流和管理能力，推动我校各学院的科技文化交流和提升大学生的创新能力，我们不仅仅是经验丰富的组织策划能力者，更是参赛者与老师们的重要沟通桥梁。
+        </p>
+    </div>
+    <div class="department">
+        <h1 class="department-title">宣传部</h1>
+        <p class="department-description">
+            我们是科协的装裱师，致力于为广大师生提供高质量的宣传服务。作为科协活动的记录者和宣传者，我们担当着记录、传递和展示科协各类活动的重要角色。我们以独特的视角和创意，捕捉活动中的精彩瞬间，撰写精心设计的文字和图像，打造出各种令人印象深刻的宣传材料。同时，我们还负责科协公众号的运营，通过精心策划的内容将科协的魅力传递给更多人。
+        </p>
+    </div>
+    <div class="department">
+        <h1 class="department-title">科技活动部</h1>
+        <p class="department-description">
+            科活身为科协搞事情的部门，我们负责策划举办学术论坛、讲座、技术沙龙等科技类活动，并进行活动记录和总结工作。
+        </p>
+    </div>
+    <a href="apply.html" class="btn">立即报名</a>
+</body>
+<style>
+      body {
             background-color: #333; 
             color: #fff; 
             font-family: Arial, sans-serif;
             padding: 20px;
-          
+            animation: gradient 10s linear infinite; 
         }
-
-        h1 {
-            color: #ffcc00; 
-        }
-
-        form {
-            background-color: rgba(0, 0, 0, 0.5); 
+     .department {
+            background-color: rgba(0, 0, 0, 0.7); 
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
             margin-top: 20px;
         }
 
-        form label, form input {
-            display: block;
+        .department-title {
+            color: #ffcc00;
+            font-size: 20px;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        form input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #444; 
+        .department-description {
+            font-size: 16px;
             color: #fff;
-            border-radius: 5px;
         }
-
-        form input[type="submit"] {
+        .btn {
+            display: inline-block;
+            padding: 10px 20px; 
             background-color: #ffcc00; 
             color: #333; 
             font-weight: bold;
             cursor: pointer;
+            text-decoration: none; 
+            border-radius: 5px; 
+            margin-top: 10px;
+            
         }
-        label, textarea {
-            display: block;
-            margin-bottom: 10px;
+        @keyframes gradient {
+            0% {
+                background: linear-gradient(45deg, #000, #111, #222, #333);
+                background-size: 400% 400%;
+                animation-timing-function: ease-in-out;
+            }
+            25% {
+                background-position: 100% 0;
+                animation-timing-function: ease-in-out;
+            }
+            50% {
+                background-position: 100% 100%;
+                animation-timing-function: ease-in-out;
+            }
+            75% {
+                background-position: 0 100%;
+                animation-timing-function: ease-in-out;
+            }
+            100% {
+                background-position: 0 0;
+                animation-timing-function: ease-in-out;
+            }
         }
-
-        textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: #444; 
-            color: #fff;
-            border-radius: 5px;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("myForm");
-
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // 阻止表单默认提交行为
-
-                // 获取表单字段的值
-                const name = document.getElementById("name").value;
-                const studentID = document.getElementById("studentID").value;
-                const major = document.getElementById("major").value;
-                const className = document.getElementById("class").value;
-                const phone = document.getElementById("phone").value;
-                const qq = document.getElementById("qq").value;
-                const firstChoice = document.getElementById("firstChoice").value;
-                const secondChoice = document.getElementById("secondChoice").value;
-
-                // 在这里可以执行提交逻辑，例如将数据发送到服务器
-                console.log("姓名:", name);
-                console.log("学号:", studentID);
-                console.log("专业:", major);
-                console.log("班级:", className);
-                console.log("手机号:", phone);
-                console.log("QQ号:", qq);
-                console.log("第一志愿部门:", firstChoice);
-                console.log("第二志愿部门:", secondChoice);
-
-                // 清空表单字段以便下一次输入
-                form.reset();
-            });
-        });
-    </script>
-</body>
+</style>
 </html>
