@@ -27,7 +27,7 @@
         <input type="text" id="secondChoice" name="secondChoice" required>
         <label for="introduction">自我介绍（兴趣爱好、性格、技能等）:</label>
         <textarea id="introduction" name="introduction" rows="4"></textarea>
-        <input type="submit" value="提交">  
+        <input type="submit" value="提交" class="btn">  
     </form>
     <style>
         body {
@@ -69,6 +69,18 @@
             color: #333; 
             font-weight: bold;
             cursor: pointer;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px; 
+            background-color: #ffcc00; 
+            color: #333; 
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none; 
+            border-radius: 5px; 
+            margin-top: 10px;
+            
         }
         label, textarea {
             display: block;
