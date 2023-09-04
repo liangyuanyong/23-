@@ -27,7 +27,9 @@
         <input type="text" id="secondChoice" name="secondChoice" required>
         <label for="introduction">自我介绍（兴趣爱好、性格、技能等）:</label>
         <textarea id="introduction" name="introduction" rows="4"></textarea>
+        <div class="btn-container">
         <a class="btn">提交报名表</a>
+       </div>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -79,17 +81,19 @@
             cursor: pointer;
         }
         .btn {
-            display: inline-block;
-            padding: 10px 20px; 
-            background-color: #ffcc00; 
-            color: #333; 
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none; 
-            border-radius: 5px; 
-            margin-top: 10px;
-            
-        }
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ffcc00;
+        color: #333;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 10px; 
+        margin-top: 20px; 
+    }
+    .btn-container {
+        text-align: center; 
+    }
         label, textarea {
             display: block;
             margin-bottom: 10px;
@@ -164,106 +168,100 @@
         .close:hover {
             color: #ffcc00;
         }
-
-    </style>
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("myForm");
-  const modal = document.getElementById("myModal");
-  const modalMessage = document.getElementById("modal-message");
-  const closeBtn = document.getElementsByClassName("close")[0];
-  const btn = document.getElementsByClassName("btn")[0];
-
-  btn.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    
-    const name = document.getElementById("name").value;
-    const studentID = document.getElementById("studentID").value;
-    const major = document.getElementById("major").value;
-    const className = document.getElementById("class").value;
-    const phone = document.getElementById("phone").value;
-    const qq = document.getElementById("qq").value;
-    const firstChoice = document.getElementById("firstChoice").value;
-    const secondChoice = document.getElementById("secondChoice").value;
-    const introduction = document.getElementById("introduction").value;
-
-   
-    if (
-      name === "" ||
-      studentID === "" ||
-      major === "" ||
-      className === "" ||
-      phone === "" ||
-      qq === "" ||
-      firstChoice === "" ||
-      secondChoice === "" ||
-      introduction === ""
-    ) {
-      modalMessage.innerHTML = "请填写完整的报名信息。";
-      modal.style.display = "block";
-      return;
+        @media (max-width: 768px) {
+        .btn {
+            width: 88%; 
+        }
     }
+    </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const modal = document.getElementById("myModal");
+    const modalMessage = document.getElementById("modal-message");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const btn = document.getElementsByClassName("btn")[0];
 
- 
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    const token = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wiaWRcIjo0NSxcInR5cGVcIjoxLFwibmlja25hbWVcIjpcIueuoeeQhuWRmFwiLFwidXNlcm5hbWVcIjpcImFkbWluXCIsXCJwYXNzd29yZFwiOm51bGwsXCJwaG9uZVwiOlwiMTU5MTk2NjY3NzJcIixcImVtYWlsXCI6XCIyNDY3MzI5OTUwOUBxcS5jb21cIixcInN0YXRlXCI6MSxcInJlbWFya3NcIjpudWxsfQ==';
-    const apiUrl = `http://1.12.219.144:7800/easypus/system/department/addApplication`;
+        const name = document.getElementById("name").value;
+        const studentID = document.getElementById("studentID").value;
+        const major = document.getElementById("major").value;
+        const className = document.getElementById("class").value;
+        const phone = document.getElementById("phone").value;
+        const qq = document.getElementById("qq").value;
+        const firstChoice = document.getElementById("firstChoice").value;
+        const secondChoice = document.getElementById("secondChoice").value;
+        const introduction = document.getElementById("introduction").value;
 
-    const headers = new Headers({
-      'Authorization': token,
-      'Content-Type': 'application/json',
+        if (
+            name === "" ||
+            studentID === "" ||
+            major === "" ||
+            className === "" ||
+            phone === "" ||
+            qq === "" ||
+            firstChoice === "" ||
+            secondChoice === "" ||
+            introduction === ""
+        ) {
+            modalMessage.innerHTML = "请填写完整的报名信息。";
+            modal.style.display = "block";
+            return;
+        }
+
+        // 使用 CORS 进行跨域请求
+        const apiUrl = `http://1.12.219.144:7800/easypus/system/department/addApplication`;
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name,
+                stuNum: studentID,
+                major,
+                clazz: className,
+                telephone: phone,
+                qq,
+                firstApplication: firstChoice,
+                secondApplication: secondChoice,
+                introduction,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                modalMessage.innerHTML = "提交成功！";
+            } else {
+                modalMessage.innerHTML = "提交失败：" + data.msg;
+            }
+
+            setTimeout(function () {
+                modal.style.display = "none";
+                form.reset();
+            }, 2000);
+
+            modal.style.display = "block";
+        })
+        .catch(error => {
+            console.error("请求出错：", error);
+            modalMessage.innerHTML = "请求出错，请重试！";
+        });
     });
 
-    const requestBody = {
-      name,
-      stuNum: studentID,
-      major,
-      clazz: className,
-      telephone: phone,
-      qq,
-      firstApplication: firstChoice,
-      secondApplication: secondChoice,
-      introduction,
-    };
-
-    fetch(apiUrl, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(requestBody),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.code === 200) {
-        modalMessage.innerHTML = "提交成功！";
-      } else {
-        modalMessage.innerHTML = "提交失败：" + data.msg;
-      }
-
-      setTimeout(function () {
+    closeBtn.addEventListener("click", function () {
         modal.style.display = "none";
-        form.reset();
-      }, 2000);
-    })
-    .catch(error => {
-      console.error("请求出错：", error);
-      modalMessage.innerHTML = "请求出错，请重试！";
     });
 
-    modal.style.display = "block";
-  });
-
-  closeBtn.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
-
-  document.querySelectorAll("input, textarea").forEach(function (element) {
-    element.addEventListener("input", function () {
-      modalMessage.innerHTML = "";
+    document.querySelectorAll("input, textarea").forEach(function (element) {
+        element.addEventListener("input", function () {
+            modalMessage.innerHTML = "";
+        });
     });
-  });
 });
-
 
 </script>
 </body>
