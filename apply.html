@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
   btn.addEventListener("click", function (event) {
     event.preventDefault();
 
-    // 获取所有输入字段的值
+    
     const name = document.getElementById("name").value;
     const studentID = document.getElementById("studentID").value;
     const major = document.getElementById("major").value;
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const secondChoice = document.getElementById("secondChoice").value;
     const introduction = document.getElementById("introduction").value;
 
-    // 检查是否有任何必填字段为空
+   
     if (
       name === "" ||
       studentID === "" ||
@@ -202,10 +202,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       modalMessage.innerHTML = "请填写完整的报名信息。";
       modal.style.display = "block";
-      return; // 防止继续执行提交请求
+      return;
     }
 
-    // 剩下的代码和之前的一样
+ 
 
     const token = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wiaWRcIjo0NSxcInR5cGVcIjoxLFwibmlja25hbWVcIjpcIueuoeeQhuWRmFwiLFwidXNlcm5hbWVcIjpcImFkbWluXCIsXCJwYXNzd29yZFwiOm51bGwsXCJwaG9uZVwiOlwiMTU5MTk2NjY3NzJcIixcImVtYWlsXCI6XCIyNDY3MzI5OTUwOUBxcS5jb21cIixcInN0YXRlXCI6MSxcInJlbWFya3NcIjpudWxsfQ==';
     const apiUrl = `http://1.12.219.144:7800/easypus/system/department/addApplication`;
@@ -263,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
 
 </script>
 </body>
