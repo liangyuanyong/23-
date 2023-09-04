@@ -38,7 +38,9 @@
             科活身为科协搞事情的部门，我们负责策划举办学术论坛、讲座、技术沙龙等科技类活动，并进行活动记录和总结工作。
         </p>
     </div>
-    <a href="apply.html" class="btn">立即报名</a>
+    <div class="btn-container">
+        <a href="apply.html" class="btn">立即报名</a>
+    </div>
 </body>
 <style>
       body {
@@ -68,17 +70,19 @@
             color: #fff;
         }
         .btn {
-            display: inline-block;
-            padding: 10px 20px; 
-            background-color:  #ffcc00; 
-            color: #333; 
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none; 
-            border-radius: 5px; 
-            margin-top: 10px;
-            
-        }
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ffcc00;
+        color: #333;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 10px; 
+        margin-top: 20px; 
+    }
+    .btn-container {
+        text-align: center; 
+    }
         @keyframes gradient {
             0% {
                 background: linear-gradient(45deg, #000, #111, #222, #333);
@@ -102,5 +106,11 @@
                 animation-timing-function: ease-in-out;
             }
         }
+        @media (max-width: 768px) {
+        .btn {
+            width: 80%; 
+        }
+    }
 </style>
 </html>
+
