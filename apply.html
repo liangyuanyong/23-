@@ -167,7 +167,6 @@
 
     </style>
     <script>
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("myForm");
   const modal = document.getElementById("myModal");
@@ -178,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
   btn.addEventListener("click", function (event) {
     event.preventDefault();
 
-    
+    // 获取所有输入字段的值
     const name = document.getElementById("name").value;
     const studentID = document.getElementById("studentID").value;
     const major = document.getElementById("major").value;
@@ -189,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const secondChoice = document.getElementById("secondChoice").value;
     const introduction = document.getElementById("introduction").value;
 
-   
+    // 检查是否有任何必填字段为空
     if (
       name === "" ||
       studentID === "" ||
@@ -203,10 +202,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       modalMessage.innerHTML = "请填写完整的报名信息。";
       modal.style.display = "block";
-      return;
+      return; // 防止继续执行提交请求
     }
 
-    
+    // 剩下的代码和之前的一样
 
     const token = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wiaWRcIjo0NSxcInR5cGVcIjoxLFwibmlja25hbWVcIjpcIueuoeeQhuWRmFwiLFwidXNlcm5hbWVcIjpcImFkbWluXCIsXCJwYXNzd29yZFwiOm51bGwsXCJwaG9uZVwiOlwiMTU5MTk2NjY3NzJcIixcImVtYWlsXCI6XCIyNDY3MzI5OTUwOUBxcS5jb21cIixcInN0YXRlXCI6MSxcInJlbWFya3NcIjpudWxsfQ==';
     const apiUrl = `http://1.12.219.144:7800/easypus/system/department/addApplication`;
@@ -264,65 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-=======
-    document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("myForm");
-    const modal = document.getElementById("myModal");
-    const modalMessage = document.getElementById("modal-message");
-    const closeBtn = document.getElementsByClassName("close")[0];
-    const btn = document.getElementsByClassName("btn")[0];
 
-    btn.addEventListener("click", function () {
-        event.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const studentID = document.getElementById("studentID").value;
-        const major = document.getElementById("major").value;
-        const className = document.getElementById("class").value;
-        const phone = document.getElementById("phone").value;
-        const qq = document.getElementById("qq").value;
-        const firstChoice = document.getElementById("firstChoice").value;
-        const secondChoice = document.getElementById("secondChoice").value;
-        const introduction = document.getElementById("introduction").value;
-       
-        form.reset();
-        if (
-            !name ||
-            !studentID ||
-            !major ||
-            !className ||
-            !phone ||
-            !qq ||
-            !firstChoice ||
-            !secondChoice ||
-            !introduction
-        ) {
-            modalMessage.innerHTML = "请完善所有信息！";
-        } else {
-            modalMessage.innerHTML = "提交成功！";
-
-            setTimeout(function () {
-                modal.style.display = "none";
-                form.reset();
-            }, 2000);
-        }
-
-        modal.style.display = "block";
-    });
-
-    closeBtn.addEventListener("click", function () {
-        modal.style.display = "none";
-    });
-
-    document.querySelectorAll("input, textarea").forEach(function (element) {
-        element.addEventListener("input", function () {
-            modalMessage.innerHTML = "";
-        });
-    });
-});
-
-
->>>>>>> ca96df531fb633509f07f6854284f3cdd295c5b0
 </script>
 </body>
 </html>
