@@ -28,6 +28,14 @@
         <label for="introduction">自我介绍（兴趣爱好、性格、技能等）:</label>
         <textarea id="introduction" name="introduction" rows="4"></textarea>
         <a class="btn">提交报名表</a>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="modal-message"></p>
+            </div>
+        </div>
+        
+
     </form>
     <style>
         body {
@@ -117,38 +125,144 @@
                 animation-timing-function: ease-in-out;
             }
         }
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        
+        .modal-content {
+            background-color: #333; 
+            font-size: 18px;
+            color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #ffcc00;
+        }
+
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("myForm");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("myForm");
+  const modal = document.getElementById("myModal");
+  const modalMessage = document.getElementById("modal-message");
+  const closeBtn = document.getElementsByClassName("close")[0];
+  const btn = document.getElementsByClassName("btn")[0];
 
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // 阻止表单默认提交行为
+  btn.addEventListener("click", function (event) {
+    event.preventDefault();
 
-                // 获取表单字段的值
-                const name = document.getElementById("name").value;
-                const studentID = document.getElementById("studentID").value;
-                const major = document.getElementById("major").value;
-                const className = document.getElementById("class").value;
-                const phone = document.getElementById("phone").value;
-                const qq = document.getElementById("qq").value;
-                const firstChoice = document.getElementById("firstChoice").value;
-                const secondChoice = document.getElementById("secondChoice").value;
+    
+    const name = document.getElementById("name").value;
+    const studentID = document.getElementById("studentID").value;
+    const major = document.getElementById("major").value;
+    const className = document.getElementById("class").value;
+    const phone = document.getElementById("phone").value;
+    const qq = document.getElementById("qq").value;
+    const firstChoice = document.getElementById("firstChoice").value;
+    const secondChoice = document.getElementById("secondChoice").value;
+    const introduction = document.getElementById("introduction").value;
 
-                // 在这里可以执行提交逻辑，例如将数据发送到服务器
-                console.log("姓名:", name);
-                console.log("学号:", studentID);
-                console.log("专业:", major);
-                console.log("班级:", className);
-                console.log("手机号:", phone);
-                console.log("QQ号:", qq);
-                console.log("第一志愿部门:", firstChoice);
-                console.log("第二志愿部门:", secondChoice);
+   
+    if (
+      name === "" ||
+      studentID === "" ||
+      major === "" ||
+      className === "" ||
+      phone === "" ||
+      qq === "" ||
+      firstChoice === "" ||
+      secondChoice === "" ||
+      introduction === ""
+    ) {
+      modalMessage.innerHTML = "请填写完整的报名信息。";
+      modal.style.display = "block";
+      return;
+    }
 
-                // 清空表单字段以便下一次输入
-                form.reset();
-            });
-        });
-    </script>
+    
+
+    const token = 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjoie1wiaWRcIjo0NSxcInR5cGVcIjoxLFwibmlja25hbWVcIjpcIueuoeeQhuWRmFwiLFwidXNlcm5hbWVcIjpcImFkbWluXCIsXCJwYXNzd29yZFwiOm51bGwsXCJwaG9uZVwiOlwiMTU5MTk2NjY3NzJcIixcImVtYWlsXCI6XCIyNDY3MzI5OTUwOUBxcS5jb21cIixcInN0YXRlXCI6MSxcInJlbWFya3NcIjpudWxsfQ==';
+    const apiUrl = `http://1.12.219.144:7800/easypus/system/department/addApplication`;
+
+    const headers = new Headers({
+      'Authorization': token,
+      'Content-Type': 'application/json',
+    });
+
+    const requestBody = {
+      name,
+      stuNum: studentID,
+      major,
+      clazz: className,
+      telephone: phone,
+      qq,
+      firstApplication: firstChoice,
+      secondApplication: secondChoice,
+      introduction,
+    };
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(requestBody),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.code === 200) {
+        modalMessage.innerHTML = "提交成功！";
+      } else {
+        modalMessage.innerHTML = "提交失败：" + data.msg;
+      }
+
+      setTimeout(function () {
+        modal.style.display = "none";
+        form.reset();
+      }, 2000);
+    })
+    .catch(error => {
+      console.error("请求出错：", error);
+      modalMessage.innerHTML = "请求出错，请重试！";
+    });
+
+    modal.style.display = "block";
+  });
+
+  closeBtn.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+
+  document.querySelectorAll("input, textarea").forEach(function (element) {
+    element.addEventListener("input", function () {
+      modalMessage.innerHTML = "";
+    });
+  });
+});
+</script>
 </body>
 </html>
