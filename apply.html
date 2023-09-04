@@ -167,6 +167,7 @@
 
     </style>
     <script>
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("myForm");
   const modal = document.getElementById("myModal");
@@ -263,6 +264,65 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+=======
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const modal = document.getElementById("myModal");
+    const modalMessage = document.getElementById("modal-message");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const btn = document.getElementsByClassName("btn")[0];
+
+    btn.addEventListener("click", function () {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const studentID = document.getElementById("studentID").value;
+        const major = document.getElementById("major").value;
+        const className = document.getElementById("class").value;
+        const phone = document.getElementById("phone").value;
+        const qq = document.getElementById("qq").value;
+        const firstChoice = document.getElementById("firstChoice").value;
+        const secondChoice = document.getElementById("secondChoice").value;
+        const introduction = document.getElementById("introduction").value;
+       
+        form.reset();
+        if (
+            !name ||
+            !studentID ||
+            !major ||
+            !className ||
+            !phone ||
+            !qq ||
+            !firstChoice ||
+            !secondChoice ||
+            !introduction
+        ) {
+            modalMessage.innerHTML = "请完善所有信息！";
+        } else {
+            modalMessage.innerHTML = "提交成功！";
+
+            setTimeout(function () {
+                modal.style.display = "none";
+                form.reset();
+            }, 2000);
+        }
+
+        modal.style.display = "block";
+    });
+
+    closeBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    document.querySelectorAll("input, textarea").forEach(function (element) {
+        element.addEventListener("input", function () {
+            modalMessage.innerHTML = "";
+        });
+    });
+});
+
+
+>>>>>>> ca96df531fb633509f07f6854284f3cdd295c5b0
 </script>
 </body>
 </html>
